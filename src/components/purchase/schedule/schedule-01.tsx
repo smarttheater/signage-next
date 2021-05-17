@@ -256,12 +256,12 @@ const ScheduleEventGroup = ({
             >
                 <div className="w-100">
                     {group.screeningEvent.name?.ja && (
-                        <p className="text-large font-weight-bold text-overflow-ellipsis-02">
+                        <p className="font-weight-bold text-overflow-ellipsis-02">
                             {group.screeningEvent.superEvent.name.ja}
                         </p>
                     )}
                     {group.screeningEvent.headline?.ja && (
-                        <p className="text-large font-weight-bold text-overflow-ellipsis-02">
+                        <p className="font-weight-bold text-overflow-ellipsis-02">
                             {group.screeningEvent.headline?.ja}
                         </p>
                     )}
