@@ -2,12 +2,15 @@
   "name": "custom-server-typescript",
   "version": "1.0.0",
   "scripts": {
-    "dev": "set NODE_ENV=development && nodemon",
+    "dev": "set NEXT_DEVELOPMENT_MODE=true && nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "node dist/index.js",
     "format": "prettier --write .",
     "lint": "eslint src",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "deploy-development": "gcloud app deploy ./app.development.gcp.yaml --project smart-theater-development-sign",
+    "deploy-test": "gcloud app deploy ./app.test.gcp.yaml --project smart-theater-test-sign",
+    "deploy-production": "gcloud app deploy ./app.production.gcp.yaml --project smart-theater-production-sign --no-promote --version staging"
   },
   "dependencies": {
     "@cinerino/sdk": "^2.1.0",

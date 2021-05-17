@@ -10,7 +10,7 @@ const log = debug('basicAuth');
  *
  * @module basicAuthMiddleware
  */
-export default (req: Request, res: Response, next: NextFunction) => {
+export default (req: Request, res: Response, next: NextFunction): void => {
     if (
         process.env.BASIC_AUTH_NAME === undefined ||
         process.env.BASIC_AUTH_PASS === undefined ||

@@ -152,7 +152,7 @@ const SettingPage = (): JSX.Element => {
                 page: data.page === '' ? undefined : Number(data.page),
                 direction: data.direction,
                 layout: data.layout,
-                image: data.image,
+                image: data.image === '' ? undefined : data.image,
                 color: data.color,
                 language: state.user.language,
             })

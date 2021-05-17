@@ -6,7 +6,7 @@ import expressApp from './app/app';
 const port = process.env.HTTPS
     ? parseInt(process.env.PORT || '443', 10)
     : parseInt(process.env.PORT || '8080', 10);
-const dev = process.env.NODE_ENV === 'development';
+const dev = process.env.NEXT_DEVELOPMENT_MODE ? true : false;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 

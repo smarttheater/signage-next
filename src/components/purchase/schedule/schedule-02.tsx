@@ -5,6 +5,9 @@ import { Models } from '../../..';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './schedule-02.module.scss';
 import { getEnvironment } from '../../../environments/environment';
+import SwiperCore, { Autoplay } from 'swiper';
+
+SwiperCore.use([Autoplay]);
 
 type Props = {
     screeningEvents: factory.chevre.event.screeningEvent.IEvent[];
@@ -93,11 +96,15 @@ const Schedule02 = ({
                     s.autoplay.stop();
                 }}
                 onUpdate={(s) => {
-                    if (page === undefined) {
+                    const pageCount =
+                        (image === undefined ? 0 : 1) + pages.length;
+                    if (page !== undefined) {
+                        s.slideTo(page, 0);
+                    }
+                    if (page === undefined && pageCount > 1) {
                         s.autoplay.start();
                         return;
                     }
-                    s.slideTo(page, 0);
                 }}
             >
                 {image && (

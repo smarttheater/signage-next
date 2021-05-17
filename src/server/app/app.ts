@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import basicAuth from './middlewares/basicAuth/basic-auth.middleware';
 import benchmarks from './middlewares/benchmarks/benchmarks.middleware';
 import ipFilter from './middlewares/ipFilter/ip-filter.middleware';
-import session from './middlewares/session/session.middleware';
+// import session from './middlewares/session/session.middleware';
 import router from './routes/router';
 
 process.env.VERSION = JSON.parse(
@@ -22,7 +22,7 @@ app.use(ipFilter); // IP制限
 app.use(basicAuth); // ベーシック認証
 app.use(helmet({ contentSecurityPolicy: false })); // セキュリティー対策
 app.set('trust proxy', 1);
-app.use(session); // セッション
+// app.use(session); // セッション
 app.use(benchmarks); // ベンチマーク的な
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

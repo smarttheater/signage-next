@@ -209,10 +209,37 @@ export function resetViewport(): void {
     // target.style.opacity = '0';
 }
 
+/**
+ * サーバータイム取得
+ */
 export async function getServerTime(): Promise<{
     date: string;
 }> {
     const fetchResult = await fetch('/api/serverTime', {
+        method: 'GET',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+        },
+    });
+    if (!fetchResult.ok) {
+        throw new Error(
+            JSON.stringify({
+                status: fetchResult.status,
+                statusText: fetchResult.statusText,
+            })
+        );
+    }
+    return await fetchResult.json();
+}
+
+/**
+ * バージョン取得
+ */
+export async function getVersion(): Promise<{
+    version: string;
+}> {
+    const fetchResult = await fetch('/api/version', {
         method: 'GET',
         cache: 'no-cache',
         headers: {

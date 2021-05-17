@@ -168,11 +168,15 @@ const Schedule01 = ({
                     s.autoplay.stop();
                 }}
                 onUpdate={(s) => {
-                    if (page === undefined) {
+                    const pageCount =
+                        (image === undefined ? 0 : 1) + pages.length;
+                    if (page !== undefined) {
+                        s.slideTo(page, 0);
+                    }
+                    if (page === undefined && pageCount > 1) {
                         s.autoplay.start();
                         return;
                     }
-                    s.slideTo(page, 0);
                 }}
             >
                 {image && (

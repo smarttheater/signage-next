@@ -43,6 +43,8 @@ export type UserState = {
 
 export type UpdateUserPayload = UserState;
 
+export type SetVersionPayload = string;
+
 const initialState: UserState = {
     language: 'ja',
     direction: Models.Common.Direction.HORIZONTAL,
@@ -62,6 +64,10 @@ export const userSlice = createSlice({
             state.layout = action.payload.layout;
             state.image = action.payload.image;
             state.color = action.payload.color;
+        },
+        setVersion(state, action: PayloadAction<SetVersionPayload>) {
+            console.log('setVersion', action.payload);
+            state.version = action.payload;
         },
         reset(): UserState {
             return initialState;

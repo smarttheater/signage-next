@@ -19,20 +19,20 @@ router.post('/project', async (req, res) => {
         sonyTokenUrl: process.env.SONY_TOKEN_URL,
         env: process.env.APP_ENV,
         gtmId: process.env.GTM_ID,
-        analyticsId: process.env.ANALYTICS_ID
+        analyticsId: process.env.ANALYTICS_ID,
     };
     if (process.env.PROJECT_ID !== undefined && process.env.PROJECT_ID !== '') {
         res.json({
             projectId: process.env.PROJECT_ID,
             projectName: process.env.PROJECT_NAME,
             storageUrl: process.env.PROJECT_STORAGE_URL,
-            ...response
+            ...response,
         });
         return;
     }
     res.json({
         storageUrl: process.env.STORAGE_URL,
-        ...response
+        ...response,
     });
 });
 

@@ -11,6 +11,7 @@ import Schedule01 from '../../../../components/purchase/schedule/schedule-01';
 import Schedule02 from '../../../../components/purchase/schedule/schedule-02';
 import ProjectGuard from '../../../../components/guard/projectGuard';
 import SettingGuard from '../../../../components/guard/settingGuard';
+import { userSlice } from '../../../../store/user';
 
 const SchedulePage = (): JSX.Element => {
     const state = useSelector((state: RootState) => state);
@@ -26,7 +27,27 @@ const SchedulePage = (): JSX.Element => {
             setUpdateCount(updateCount + 1);
             return;
         }
-        (async () => {
+        const process = async () => {
+            dispatch(
+                utilSlice.actions.changeLoading({
+                    loading: true,
+                    process: 'バージョンを確認しています',
+                })
+            );
+            try {
+                const { version } = await Functions.Util.getVersion();
+                if (version !== state.user.version) {
+                    dispatch(userSlice.actions.setVersion(version));
+                    location.reload();
+                }
+            } catch (error) {
+                console.error(error);
+            }
+            dispatch(
+                utilSlice.actions.changeLoading({
+                    loading: false,
+                })
+            );
             dispatch(
                 utilSlice.actions.changeLoading({
                     loading: true,
@@ -43,24 +64,12 @@ const SchedulePage = (): JSX.Element => {
                     loading: false,
                 })
             );
+        };
+        (async () => {
+            await process();
         })();
         const intervalId = setInterval(async () => {
-            dispatch(
-                utilSlice.actions.changeLoading({
-                    loading: true,
-                    process: 'スケジュールを取得しています',
-                })
-            );
-            try {
-                setScreeningEvents(await getSchedule());
-            } catch (error) {
-                console.error(error);
-            }
-            dispatch(
-                utilSlice.actions.changeLoading({
-                    loading: false,
-                })
-            );
+            await process();
         }, Number(environment.UPDATE_DELAY_TIME));
 
         return () => clearInterval(intervalId);
