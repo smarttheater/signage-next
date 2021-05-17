@@ -174,6 +174,7 @@ const Schedule01 = ({
                         s.slideTo(page, 0);
                     }
                     if (page === undefined && pageCount > 1) {
+                        s.slideTo(1, 0);
                         s.autoplay.start();
                         return;
                     }
@@ -360,7 +361,7 @@ const ScheduleEvent = ({
                 </div>
 
                 <div className="position-absolute fixed-bottom">
-                    <p className="py-1 bg-white text-dark-gray font-weight-bold text-overflow-ellipsis">
+                    <p className="py-1 bg-white text-dark-gray font-weight-bold text-overflow-ellipsis text-small">
                         <span>{data.screeningEvent.location.name?.ja}</span>
                     </p>
                 </div>

@@ -1,21 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 @import '~swiper/swiper';
+@import 'custom';
 
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
 $font-family: -apple-system, 'Titillium Web', 'Lucida Grande',
     'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', '游ゴシック',
     'メイリオ', Meiryo, Helvetica, Arial, sans-serif;
-
-$theme-colors: (
-    primary: steelblue,
-    secondary: $secondary,
-    success: #0081cc,
-    info: $info,
-    warning: #f29600,
-    danger: #e50012,
-    light: $gray-100,
-    dark: $gray-800,
-);
 
 $dark-gray: #333;
 $gray: #555;
@@ -23,8 +14,6 @@ $light-gray: #eee;
 
 $body-bg: black;
 $body-color: white;
-
-$border-width: 3px;
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -173,6 +162,22 @@ button {
 .scroll-horizontal {
     -webkit-overflow-scrolling: touch;
     overflow-x: auto;
+}
+
+.text-x-small {
+    font-size: 10px;
+}
+.text-small {
+    font-size: 0.8rem;
+}
+.text-large {
+    font-size: 1.4rem;
+}
+.text-x-large {
+    font-size: 2rem;
+}
+.text-xx-large {
+    font-size: 2.5rem;
 }
 
 .text-overflow-ellipsis {

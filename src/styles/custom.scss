@@ -1,0 +1,16 @@
+@import '~bootstrap/scss/bootstrap';
+
+$theme-colors: (
+    primary: steelblue,
+    secondary: $secondary,
+    success: #0081cc,
+    info: $info,
+    warning: #f29600,
+    danger: #e50012,
+    light: $gray-100,
+    dark: $gray-800,
+);
+
+$border-width: 3px;
+
+@import '~bootstrap/scss/bootstrap';

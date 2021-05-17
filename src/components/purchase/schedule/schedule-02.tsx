@@ -102,6 +102,7 @@ const Schedule02 = ({
                         s.slideTo(page, 0);
                     }
                     if (page === undefined && pageCount > 1) {
+                        s.slideTo(1, 0);
                         s.autoplay.start();
                         return;
                     }
@@ -232,7 +233,7 @@ const ScheduleEvent = ({
                 </div>
             </div>
             <div className="w-25 d-flex align-items-center border-right px-3">
-                <p className="w-100 text-large text-center">
+                <p className="w-100 text-center">
                     {data.screeningEvent.location.name?.ja}
                 </p>
             </div>

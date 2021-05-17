@@ -6,7 +6,7 @@ const Clock = (): JSX.Element => {
 
     React.useEffect(() => {
         const intervalId = setInterval(() => {
-            setDate(moment().format('YYYY/MM/DD (ddd) HH:mm:ss'));
+            setDate(moment().format('YYYY/MM/DD (ddd) HH:mm'));
         });
 
         return () => clearInterval(intervalId);
