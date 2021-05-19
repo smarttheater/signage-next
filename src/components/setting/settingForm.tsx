@@ -145,7 +145,7 @@ const SettingForm = ({
                             defaultValue={inputs.page}
                             {...register('page')}
                         >
-                            <option value="">未選択</option>
+                            <option value="">自動</option>
                             {[...Array(10).keys()].map((n) => {
                                 return (
                                     <option key={n + 1} value={String(n + 1)}>
@@ -201,7 +201,7 @@ const SettingForm = ({
                 <div className="form-group row align-items-center">
                     <div className="col-4 text-right">
                         <div className="d-flex justify-content-end align-items-center">
-                            <p>画像</p>
+                            <p>画像URL</p>
                         </div>
                     </div>
                     <div className="col-8">

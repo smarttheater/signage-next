@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Functions } from '../..';
 import * as cinerino from '@cinerino/sdk';
+import { useRouter } from 'next/router';
 
 type Props = {
     children?: ReactNode;
@@ -8,6 +9,7 @@ type Props = {
 
 const ProjectGuard = (props: Props): JSX.Element => {
     const [mounted, setMounted] = React.useState<boolean>(false);
+    const router = useRouter();
 
     React.useEffect(() => {
         (async () => {
@@ -20,7 +22,7 @@ const ProjectGuard = (props: Props): JSX.Element => {
                 setMounted(true);
             } catch (error) {
                 console.error(error);
-                location.href = '/404.html';
+                router.replace(`/404`);
             }
         })();
     }, []);

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 
-const Clock = (): JSX.Element => {
+const Clock = ({ className }: { className?: string }): JSX.Element => {
     const [date, setDate] = React.useState<string>('');
 
     React.useEffect(() => {
@@ -11,7 +11,7 @@ const Clock = (): JSX.Element => {
 
         return () => clearInterval(intervalId);
     });
-    return <p className="mb-0">{date}</p>;
+    return <div className={className}>{date}</div>;
 };
 
 export default Clock;
