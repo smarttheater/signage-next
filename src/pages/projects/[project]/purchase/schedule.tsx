@@ -90,6 +90,62 @@ const SchedulePage = (): JSX.Element => {
         return searchResult;
     };
 
+    const searchScreeningEventSeries = async (
+        params: cinerino.factory.chevre.event.ISearchConditions<cinerino.factory.chevre.eventType.ScreeningEventSeries>
+    ) => {
+        let result: cinerino.factory.chevre.event.IEvent<cinerino.factory.chevre.eventType.ScreeningEventSeries>[] = [];
+        const workPerformedIdentifiers: string[][] = [];
+        const splitNumber = 50;
+        let splitCount = 0;
+        if (
+            params.workPerformed?.identifiers?.length !== undefined &&
+            params.workPerformed.identifiers.length > 0
+        ) {
+            params.workPerformed.identifiers.forEach((identifier, index) => {
+                if (workPerformedIdentifiers[splitCount] === undefined) {
+                    workPerformedIdentifiers[splitCount] = [];
+                }
+                workPerformedIdentifiers[splitCount].push(identifier);
+                index++;
+                if (index % splitNumber === 0) {
+                    splitCount++;
+                }
+            });
+        }
+
+        const options = await Functions.Cinerino.createOption();
+        if (workPerformedIdentifiers.length === 0) {
+            const searchResult = await Functions.Cinerino.searchAll<
+                cinerino.factory.chevre.event.ISearchConditions<cinerino.factory.chevre.eventType.ScreeningEventSeries>,
+                cinerino.factory.chevre.event.IEvent<cinerino.factory.chevre.eventType.ScreeningEventSeries>
+            >({
+                service: new cinerino.service.Event(options),
+                condition: { ...params },
+                method: 'search',
+            });
+            result = searchResult;
+        } else {
+            for (let i = 0; i < workPerformedIdentifiers.length; i++) {
+                const searchResult = await Functions.Cinerino.searchAll<
+                    cinerino.factory.chevre.event.ISearchConditions<cinerino.factory.chevre.eventType.ScreeningEventSeries>,
+                    cinerino.factory.chevre.event.IEvent<cinerino.factory.chevre.eventType.ScreeningEventSeries>
+                >({
+                    service: new cinerino.service.Event(options),
+                    condition: {
+                        ...params,
+                        workPerformed: {
+                            identifiers: workPerformedIdentifiers[i],
+                        },
+                    },
+                    method: 'search',
+                });
+                result = [...result, ...searchResult];
+            }
+        }
+
+        return result;
+    };
+
     const searchEvent = async <T extends cinerino.factory.chevre.eventType>(
         params: cinerino.factory.chevre.event.ISearchConditions<T>
     ) => {
@@ -122,23 +178,35 @@ const SchedulePage = (): JSX.Element => {
             offers: { availableFrom: moment().toDate() },
         });
 
+        const workPerformedIdentifiers: string[][] = [];
+        const splitNumber = 50;
+        let splitCount = 0;
+        creativeWorks
+            .map((c) => c.identifier)
+            .forEach((identifier, index) => {
+                if (workPerformedIdentifiers[splitCount] === undefined) {
+                    workPerformedIdentifiers[splitCount] = [];
+                }
+                workPerformedIdentifiers[splitCount].push(identifier);
+                index++;
+                if (index % splitNumber === 0) {
+                    splitCount++;
+                }
+            });
+
         const screeningEventSeries =
             Models.Common.Layout.TYPE01 === layout
-                ? await searchEvent<cinerino.factory.chevre.eventType.ScreeningEventSeries>(
-                      {
-                          typeOf:
-                              cinerino.factory.chevre.eventType
-                                  .ScreeningEventSeries,
-                          location: {
-                              branchCode: { $eq: movieTheater.branchCode },
-                          },
-                          workPerformed: {
-                              identifiers: creativeWorks.map(
-                                  (c) => c.identifier
-                              ),
-                          },
-                      }
-                  )
+                ? await searchScreeningEventSeries({
+                      typeOf:
+                          cinerino.factory.chevre.eventType
+                              .ScreeningEventSeries,
+                      location: {
+                          branchCode: { $eq: movieTheater.branchCode },
+                      },
+                      workPerformed: {
+                          identifiers: creativeWorks.map((c) => c.identifier),
+                      },
+                  })
                 : [];
 
         const screeningEvent = await searchEvent<cinerino.factory.chevre.eventType.ScreeningEvent>(
