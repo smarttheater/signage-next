@@ -29,7 +29,7 @@ const Footer = (): JSX.Element => {
                             size="sm"
                             className="rounded-circle opacity-30"
                         >
-                            <i className="fas fa-list"></i>
+                            <i className="bi bi-list-ul"></i>
                         </Button>
                     </Link>
                 </div>

@@ -1,5 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
 @import '~swiper/swiper';
 @import 'custom';
 
@@ -342,18 +342,18 @@ button {
     overflow: hidden;
 }
 
-input[type='radio'] + div .fa-circle {
+input[type='radio'] + div .bi-circle {
     display: block;
 }
 
-input[type='radio'] + div .fa-dot-circle {
+input[type='radio'] + div .bi-record-circle {
     display: none;
 }
 
-input[type='radio']:checked + div .fa-circle {
+input[type='radio']:checked + div .bi-circle {
     display: none;
 }
 
-input[type='radio']:checked + div .fa-dot-circle {
+input[type='radio']:checked + div .bi-record-circle {
     display: block;
 }

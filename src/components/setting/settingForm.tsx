@@ -234,8 +234,8 @@ const SettingForm = ({
                                                 value={c}
                                             />
                                             <div className="mr-2">
-                                                <i className="far fa-circle"></i>
-                                                <i className="far fa-dot-circle"></i>
+                                                <i className="bi bi-circle"></i>
+                                                <i className="bi bi-record-circle"></i>
                                             </div>
                                             <div
                                                 className={
